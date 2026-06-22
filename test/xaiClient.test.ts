@@ -99,6 +99,23 @@ describe("callResponses", () => {
       message: expect.stringContaining("personal-team-blocked:spending-limit"),
     });
   });
+  it("401 maps to EXPIRED and hints re-login", async () => {
+    const f = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: false, status: 401, text: async () => "invalid token" });
+    await expect(
+      callResponses({
+        accessToken: "AT",
+        model: "grok-4.3",
+        toolEntry: { type: "x_search" },
+        query: "q",
+        fetchImpl: f as unknown as typeof fetch,
+      }),
+    ).rejects.toMatchObject({
+      code: "EXPIRED",
+      message: expect.stringContaining("grok_login"),
+    });
+  });
   it("surfaces raw text for non-JSON error bodies", async () => {
     const f = vi
       .fn()

@@ -146,6 +146,12 @@ export async function callResponses(input: {
       const msg = typeof j.error === "string" ? j.error : "";
       detail = (code + msg).trim() || raw;
     } catch {}
+    if (res.status === 401) {
+      throw new ToolError(
+        "EXPIRED",
+        `xAI API 401 (token rejected): ${detail}. Log in again with grok_login.`,
+      );
+    }
     const errCode = res.status === 403 ? "FORBIDDEN_403" : "HTTP_ERROR";
     throw new ToolError(errCode, `xAI API ${res.status}: ${detail}`);
   }
