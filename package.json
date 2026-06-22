@@ -1,6 +1,6 @@
 {
   "name": "grok-x-search-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unofficial stdio MCP server that calls xAI's x_search / web_search via X Premium / SuperGrok OAuth (no API key, no metered billing).",
   "keywords": [
     "mcp",
