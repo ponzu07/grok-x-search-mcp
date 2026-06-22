@@ -1,0 +1,67 @@
+{
+  "name": "grok-x-search-mcp",
+  "version": "0.1.0",
+  "description": "Unofficial stdio MCP server that calls xAI's x_search / web_search via X Premium / SuperGrok OAuth (no API key, no metered billing).",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "xai",
+    "grok",
+    "x-search",
+    "web-search",
+    "oauth",
+    "claude-code",
+    "codex"
+  ],
+  "license": "MIT",
+  "author": "ponzu07 (https://github.com/ponzu07)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ponzu07/grok-x-search-mcp.git"
+  },
+  "homepage": "https://github.com/ponzu07/grok-x-search-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/ponzu07/grok-x-search-mcp/issues"
+  },
+  "type": "module",
+  "bin": {
+    "grok-x-search-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.ja.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check ./src ./test",
+    "format": "biome check --write ./src ./test",
+    "check": "biome ci ./src ./test",
+    "start": "node dist/server.js",
+    "prepare": "husky",
+    "prepublishOnly": "npm run lint && npm run build && npm test"
+  },
+  "lint-staged": {
+    "*.{ts,json}": "biome check --write --no-errors-on-unmatched"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
